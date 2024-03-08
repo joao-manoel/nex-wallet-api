@@ -17,6 +17,19 @@ export class PrismaWalletsRepository implements IWalletRepository {
 
     return WalletMapper.toDomain(wallet)
   }
+
+  async findByUserIdAndName(userId: string, name: string): Promise<Wallet> {
+    const wallet = await prisma.wallet.findFirst({
+      where: {
+        userId,
+        name
+      }
+    })
+
+    if(!wallet)
+
+    return WalletMapper.toDomain(wallet)
+  }
   save(wallet: Wallet): Promise<void> {
     throw new Error("Method not implemented.");
   }
