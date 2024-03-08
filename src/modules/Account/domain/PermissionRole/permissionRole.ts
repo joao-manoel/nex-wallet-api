@@ -21,7 +21,9 @@ export class PermissionRole extends Entity<IPermissionRoleProps>{
   }
 
   static validate(permissionId: string, roleId: string) {
-    if (permissionId === undefined || roleId === undefined) {
+    if (permissionId === undefined || permissionId === null|| permissionId.length === 0
+      || roleId === undefined || roleId === null || roleId.length === 0
+      ) {
       return false
     }
 

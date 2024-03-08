@@ -16,10 +16,12 @@ model User {
   email    String @unique
   password String
 
-  created_at DateTime   @default(now())
-  updated_at DateTime   @default(now()) @updatedAt
+  roles   RoleUser[]
+  wallets Wallet[]
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
   deleted_at DateTime?
-  roles      RoleUser[]
 
   @@map("users")
 }
@@ -71,4 +73,86 @@ model RoleUser {
   assignedAt DateTime @default(now())
 
   @@id([roleId, userId])
+}
+
+model Wallet {
+  id   String @id
+  name String @unique
+
+  Invoice Invoice[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  @@map("wallets")
+}
+
+model Invoice {
+  id             String   @id
+  description    String   @unique
+  value_in_cents Int
+  expirantion    DateTime
+  pay_at         DateTime
+
+  type        TypeInvoice
+  typePayment TypePayment
+
+  card Card? @relation(fields: [cardId], references: [id])
+
+  category          InvoiceCategory @relation(fields: [invoiceCategoryId], references: [id])
+  invoiceCategoryId String
+
+  wallet   Wallet @relation(fields: [walletId], references: [id])
+  walletId String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+  cardId     String?
+
+  @@map("invoices")
+}
+
+model InvoiceCategory {
+  id    String @id
+  name  String
+  color String
+  icon  String
+
+  Invoice Invoice[]
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  @@map("invoice_category")
+}
+
+model Card {
+  id             String   @id
+  name           String
+  limit_in_cents Int
+  expirantion    DateTime
+
+  Invoice Invoice[]
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+}
+
+enum TypeInvoice {
+  ENTRY
+  EXIT
+}
+
+enum TypePayment {
+  CREDITO
+  DEBITO
+  BOLETO
+  PIX
 }
