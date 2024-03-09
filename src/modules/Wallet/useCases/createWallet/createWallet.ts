@@ -1,8 +1,8 @@
 import { Either, left, right } from "@core/logic/Either";
 import { UserNotFoundError } from "@modules/Account/errors/UserNotFoundError";
 import { IUserRepository } from "@modules/Account/repositories/IUserRepository";
-import { InvalidNameError } from "@modules/Wallet/domain/wallet/errors/invalidNameError";
-import { UserIdRequiredError } from "@modules/Wallet/domain/wallet/errors/userIdRequiredError";
+import { InvalidNameError } from "@modules/Wallet/errors/invalidNameError";
+import { UserIdRequiredError } from "@modules/Wallet/errors/userIdRequiredError";
 import { Name } from "@modules/Wallet/domain/wallet/name";
 import { Wallet } from "@modules/Wallet/domain/wallet/wallet";
 import { IWalletRepository } from "@modules/Wallet/repositories/IWalletRepository";

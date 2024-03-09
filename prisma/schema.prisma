@@ -121,7 +121,6 @@ model InvoiceCategory {
   id    String @id
   name  String
   color String
-  icon  String
 
   Invoice Invoice[]
 

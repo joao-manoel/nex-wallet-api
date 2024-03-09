@@ -1,5 +1,5 @@
 import { Either, left, right } from "@core/logic/Either";
-import { InvalidNameError } from "../../errors/invalidNameError";
+import { InvalidNameError } from "@modules/Wallet/errors/invalidNameError";
 
 export class Name {
   private readonly name: string;

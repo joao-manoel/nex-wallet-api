@@ -1,8 +1,8 @@
-import { InvalidNameError } from './errors/invalidNameError';
+import { InvalidNameError } from '../../errors/invalidNameError';
 import { Entity } from "@core/domain/Entity";
 import { Name } from "./name";
 import { Either, left, right } from '@core/logic/Either';
-import { UserIdRequiredError } from './errors/userIdRequiredError';
+import { UserIdRequiredError } from '../../errors/userIdRequiredError';
 
 interface IWalletProps {
   name: Name
