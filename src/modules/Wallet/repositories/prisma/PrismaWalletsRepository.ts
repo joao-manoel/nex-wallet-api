@@ -19,6 +19,7 @@ export class PrismaWalletsRepository implements IWalletRepository {
   }
 
   async findByUserIdAndName(userId: string, name: string): Promise<Wallet> {
+
     const wallet = await prisma.wallet.findFirst({
       where: {
         userId,
@@ -26,7 +27,9 @@ export class PrismaWalletsRepository implements IWalletRepository {
       }
     })
 
-    if(!wallet)
+    if(!wallet){
+      return null
+    }
 
     return WalletMapper.toDomain(wallet)
   }

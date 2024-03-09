@@ -17,6 +17,7 @@ type PersistenceRaw = {
 
 export class WalletMapper {
   static toDomain(raw: PersistenceWallet): Wallet {
+
     const nameOrError = Name.create(raw.name)
 
     if(nameOrError.isLeft()){

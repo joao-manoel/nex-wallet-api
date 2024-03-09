@@ -23,6 +23,7 @@ export class CreateWallet {
   ){}
 
   async execute({name, userId}): Promise<CreateWalletResponse>{
+
     const nameOrError = Name.create(name)
 
     if(nameOrError.isLeft()){
@@ -39,12 +40,6 @@ export class CreateWallet {
       return left(new UserNotFoundError())
     }
 
-    const walletAlreadyExistWithName = await this.walletRepository.findByUserIdAndName(userId, name)
-
-    if(walletAlreadyExistWithName){
-      return left(new WalletNameExistError(name))
-    }
-
     const walletOrError = Wallet.create({
       name: nameOrError.value,
       userId
@@ -54,7 +49,13 @@ export class CreateWallet {
       return left(walletOrError.value)
     }
 
-    const wallet = walletOrError.value
+    const walletAlreadyExistWithName = await this.walletRepository.findByUserIdAndName(userId, name)
+
+    if(walletAlreadyExistWithName){
+      return left(new WalletNameExistError(name))
+    }
+
+    const wallet = walletOrError.value    
 
     await this.walletRepository.create(wallet)
     

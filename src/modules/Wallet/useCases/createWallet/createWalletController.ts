@@ -24,6 +24,8 @@ export class CreateWalletController implements Controller {
         name, userId
       })
 
+      
+
       if(result.isLeft()){
         const error = result.value
 
