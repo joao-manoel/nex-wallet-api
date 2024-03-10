@@ -18,6 +18,25 @@ export class PrismaWalletsRepository implements IWalletRepository {
     return WalletMapper.toDomain(wallet)
   }
 
+  async findAllWalletsByUserId(userId: string): Promise<any>{
+    const wallets = await prisma.wallet.findMany({
+      where: {
+        userId
+      }
+    })
+
+    if(!wallets) return null
+
+    return WalletMapper.toDto({
+      wallets: wallets.map(wallet => {
+        return {
+          id: wallet.id,
+          name: wallet.name
+        }
+      })
+    })
+  }
+
   async findByIdWithUserId(id: string, userId: string): Promise<Wallet> {
     const wallet = await prisma.wallet.findFirst({
       where: {
@@ -59,24 +78,7 @@ export class PrismaWalletsRepository implements IWalletRepository {
     })
   }
   async findAll(skip: number, take: number): Promise<any> {
-    const [wallets, total] = await prisma.$transaction([
-      prisma.wallet.findMany({
-        select: {
-          id: true,
-          name: true,
-          user: {
-            select: {
-              id: true
-            }
-          }
-        },
-          skip, take}
-      ),
-      prisma.wallet.count()
-    ])
-
-    const totalPage = Math.ceil(total / take)
-    return WalletMapper.toDto({wallets, total, totalPage})
+    throw new Error("Method not implemented.");
   }
 
 }

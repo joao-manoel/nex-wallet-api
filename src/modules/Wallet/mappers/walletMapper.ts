@@ -4,14 +4,9 @@ import { Wallet } from './../domain/wallet/wallet';
 import {Wallet as PersistenceWallet} from "@prisma/client"
 
 type PersistenceRaw = {
-  total: number
-  totalPage: number
   wallets: {
     id: string
     name: string
-    user: {
-      id: string
-    }
   }[]
 }
 
@@ -46,13 +41,10 @@ export class WalletMapper {
 
   static toDto(raw: PersistenceRaw): WalletListDto {
     return {
-      total: raw.total,
-      totalPage: raw.totalPage,
       wallets: raw.wallets.map(wallet => {
         return {
           id: wallet.id,
           name: wallet.name,
-          user: wallet.user
         }
       })
     }
