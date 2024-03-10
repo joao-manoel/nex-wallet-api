@@ -1,21 +1,20 @@
 import { Either, left, right } from "@core/logic/Either";
-import { Wallet } from "@modules/Wallet/domain/wallet/wallet";
 import { WalletNotFoundError } from "@modules/Wallet/errors/WalletNotFoundError";
 import { IWalletRepository } from "@modules/Wallet/repositories/IWalletRepository";
 
-type UserWalletResponse = {
+type WalletByUserResponse = {
   id: string
   name: string
 }
 
-type GetUserWalletResponse = Either<WalletNotFoundError, UserWalletResponse>
+type GetWalletByUserResponse = Either<WalletNotFoundError, WalletByUserResponse>
 
-export class GetUserWallet {
+export class GetWalletByUser {
   constructor(
     private walletRepository: IWalletRepository,
   ){}
 
-  async execute({ id, userId}): Promise<GetUserWalletResponse>{
+  async execute({ id, userId}): Promise<GetWalletByUserResponse>{
     const wallet = await this.walletRepository.findByIdWithUserId(id, userId)
 
     if(!wallet){

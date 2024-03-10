@@ -1,17 +1,17 @@
 import { Controller } from "@core/infra/Controller";
-import { GetUserWallet } from "./getUserWallet";
+import { GetWalletByUser } from "./getWalletByUser";
 import { HttpResponse, clientError, fail, notFound, ok } from "@core/infra/HttpResponse";
 import { WalletNotFoundError } from "@modules/Wallet/errors/WalletNotFoundError";
 
-type GetMyWalletRequest = {
+type GetWalletByUserRequest = {
   id: string
   userId: string
 }
 
-export class GetUserWalletController implements Controller {
-  constructor(private getUserWallet: GetUserWallet){}
+export class GetWalletByUserController implements Controller {
+  constructor(private getUserWallet: GetWalletByUser){}
 
-  async handle({id, userId}: GetMyWalletRequest ): Promise<HttpResponse> {
+  async handle({id, userId}: GetWalletByUserRequest ): Promise<HttpResponse> {
     
     try {
       const result = await this.getUserWallet.execute({
