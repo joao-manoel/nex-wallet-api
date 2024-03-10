@@ -3,7 +3,7 @@ import { PrismaWalletsRepository } from "@modules/Wallet/repositories/prisma/Pri
 import { GetWalletByUser } from "@modules/Wallet/useCases/getWalletByUser/getWalletByUser";
 import { GetWalletByUserController } from "@modules/Wallet/useCases/getWalletByUser/getWalletByUserController";
 
-export function makeGetUserWalletController(): Controller{
+export function makeGetWalletByUserController(): Controller{
   const prismaWalletRepository = new PrismaWalletsRepository()
   const getWalletByUser = new GetWalletByUser(prismaWalletRepository)
   const getWalletByUserController = new GetWalletByUserController(getWalletByUser)
