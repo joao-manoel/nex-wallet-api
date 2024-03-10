@@ -2,12 +2,12 @@ import { Either, left, right } from "@core/logic/Either";
 import { WalletNotFoundError } from "@modules/Wallet/errors/WalletNotFoundError";
 import { IWalletRepository } from "@modules/Wallet/repositories/IWalletRepository";
 
-type WalletByUserResponse = {
+type getWalletByUserResponse = {
   id: string
   name: string
 }
 
-type GetWalletByUserResponse = Either<WalletNotFoundError, WalletByUserResponse>
+type GetWalletByUserResponse = Either<WalletNotFoundError, getWalletByUserResponse>
 
 export class GetWalletByUser {
   constructor(
