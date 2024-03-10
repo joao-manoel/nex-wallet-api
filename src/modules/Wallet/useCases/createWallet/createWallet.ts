@@ -49,7 +49,7 @@ export class CreateWallet {
       return left(walletOrError.value)
     }
 
-    const walletAlreadyExistWithName = await this.walletRepository.findByUserIdAndName(userId, name)
+    const walletAlreadyExistWithName = await this.walletRepository.findByUserIdWithName(userId, name)
 
     if(walletAlreadyExistWithName){
       return left(new WalletNameExistError(name))

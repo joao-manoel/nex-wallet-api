@@ -1,6 +1,5 @@
 import { Controller } from "@core/infra/Controller";
 import { HttpResponse, clientError, conflict, created, fail, notFound,  } from "@core/infra/HttpResponse";
-import { Validator } from "@core/infra/Validator";
 import { CreateWallet } from "./createWallet";
 import { UserNotFoundError } from "@modules/Account/errors/UserNotFoundError";
 import { WalletNameExistError } from "./errors/WalletNameExistError";
